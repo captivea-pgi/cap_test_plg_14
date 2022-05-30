@@ -10,7 +10,7 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-class CapMassMailController(http.Controller):
+class CapMassMailController(MassMailController):
 
     @http.route(['/mail/mailing/<int:mailing_id>/unsubscribe'], type='http', website=True, auth='public')
     def mailing(self, mailing_id, email=None, res_id=None, token="", **post):
