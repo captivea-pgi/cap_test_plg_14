@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="rule_action" model="ir.actions.act_window">
+        <field name="name">Properties</field>
+        <field name="res_model">automated.rules</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+<!--&lt;!&ndash;    This is what allows us to add filters&ndash;&gt;-->
+<!--    <record id="estate_property_view_search" model="ir.ui.view">-->
+<!--        <field name="name">estate.property.view.search</field>-->
+<!--        <field name="model">automated.rules</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <search string="Search Opportunities">-->
+<!--&lt;!&ndash;                predefined search&ndash;&gt;-->
+<!--                <field name="name" string="Title"/>-->
+<!--                <field name="postcode"/>-->
+<!--                <field name="expected_price"/>-->
+<!--                <field name="bedrooms"/>-->
+<!--                <field name="living_area" string="Living Area (sqm)"/>-->
+<!--                <field name="facades"/>-->
+<!--&lt;!&ndash;                Add a predefined filter&ndash;&gt;-->
+<!--                <filter string="Available" name="Available" domain="['|', ('state', '=', 'new'), ('state', '=', 'offer_received')]"/>-->
+<!--&lt;!&ndash;                add a predefined group by&ndash;&gt;-->
+<!--                <group expand="1" string="Group By">-->
+<!--                    <filter string="Postcode" name="postcode" context="{'group_by':'postcode'}"/>-->
+<!--                </group>-->
+<!--            </search>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="automated_rules_view_tree" model="ir.ui.view">
+        <field name="name">automated.rules.tree</field>
+        <field name="model">automated.rules</field>
+        <field name="arch" type="xml">
+<!--            This is to add new columns to our table-->
+            <tree string="Channel">
+                <field name="name" string="Nom de la règle"/>
+                <field name="sender"/>
+                <field name="selector1"/>
+                <field name="object"/>
+                <field name="selector2"/>
+                <field name="body"/>
+                <field name="stage_id"/>
+                <field name="team_id"/>
+                <field name="model_id"/>
+                <field name="priority"/>
+                <field name="user_id"/>
+<!--                <field name="tag_ids" widget="many2many_tags"/>-->
+            </tree>
+        </field>
+    </record>
+
+<!--    mise en page-->
+    <record id="automated_rules_view_form" model="ir.ui.view">
+        <field name="name">automated.rules.form</field>
+        <field name="model">automated.rules</field>
+        <field name="arch" type="xml">
+            <form string="Lost Reason">
+<!--                <header>-->
+<!--                    <button name="action_sold" type="object" string="Sold"/>-->
+<!--                    <button name="action_cancel" type="object" string="Cancel"/>-->
+<!--                </header>-->
+                <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="action_id"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <h3>Liste des conditions</h3>
+                                <field name="sender"/>
+                                <field name="operator_sender"/>
+                                <field name="selector1"/>
+                                <field name="object"/>
+                                <field name="operator_object"/>
+                                <field name="selector2" attrs="{'invisible': ['|', '|', '|', '|', '|', ('sender', '==', False), ('object', '==', False), ('body', '==', False), ('sender', '==', ''), ('object', '==', ''), ('body', '==', '')]}"/>
+                                <field name="body"/>
+                                <field name="operator_body"/>
+                            </group>
+                            <group>
+                                <h3>Liste des actions</h3>
+                                <field name="stage_id"/>
+                                <field name="team_id"/>
+                                <field name="model_id"/>
+                                <field name="priority"/>
+                                <field name="user_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <group>
+                                    <field name="description" class="mb16" nolabel="1"/>
+                                </group>
+                            </page>
+                            <page string="Code Python">
+                                <group>
+                                    <field name="generatedCode" class="mb16" nolabel="1"/>
+                                </group>
+                            </page>
+                        </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

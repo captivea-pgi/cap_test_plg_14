@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_root" name="Règles" web_icon="cap_rule,static/src/img/odoo_icon.png">
+        <menuitem id="first_level_menu" name="Rules">
+            <menuitem id="rule_menu_action" action="rule_action" />
+        </menuitem>
+    </menuitem>
+</odoo>
