@@ -21,7 +21,7 @@ class CapMassMailController(MassMailController):
             if not self._valid_unsubscribe_token(mailing_id, res_id, email, str(token)):
                 raise exceptions.AccessDenied()
 
-            if mailing.mailing_model_real == 'mailing.contact':
+            if mailing.mailing_model_real == 'mailing.contact' or mailing.mailing_model_real == 'res.partner':
                 _logger.info(f"mailing model is : {mailing.mailing_model_real}")
                 # Unsubscribe directly + Let the user choose his subscriptions
                 mailing.update_opt_out(email, mailing.contact_list_ids.ids, True)
