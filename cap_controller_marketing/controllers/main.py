@@ -24,7 +24,11 @@ class CapMassMailController(MassMailController):
             if mailing.mailing_model_real == 'mailing.contact' or mailing.mailing_model_real == 'res.partner':
                 _logger.info(f"mailing model is : {mailing.mailing_model_real}")
                 # Unsubscribe directly + Let the user choose his subscriptions
-                mailing.update_opt_out(email, mailing.contact_list_ids.ids, True)
+                #This part doesn't work for marketing automation as the field contact_list_ids.ids doesn't work. We need to choose a way to workarounf this.
+                if mailing.mailing_model_real == 'mailing.contact':
+                    mailing.update_opt_out(email, mailing.contact_list_ids.ids, True)
+                elif mailing.mailing_model_real == 'res.partner':
+                    mailing.update_opt_out(email, mailing.x_studio_mailing_list.ids, True)
 
                 contacts = request.env['mailing.contact'].sudo().search([('email_normalized', '=', tools.email_normalize(email))])
                 subscription_list_ids = contacts.mapped('subscription_list_ids')
