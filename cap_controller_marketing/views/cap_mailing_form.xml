@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <record id="cap_mailing_view_form" model="ir.ui.view">
-            <field name="name">cap.mailing.view.form</field>
-            <field name="model">mailing.mailing</field>
-            <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='preview']" position="after">
-                    <field name="mailing_list_ids" string="Mailing List" widget="many2many_tags"/>
-                </xpath>
-            </field>
-        </record>
-    </data>
+    <record id="cap_mailing_view_form" model="ir.ui.view">
+        <field name="name">cap_mailing_view_form</field>
+        <field name="model">mailing.mailing</field>
+        <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='preview']" position="after">
+                <field name="mailing_list_ids" string="Mailing List" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
 </odoo>
